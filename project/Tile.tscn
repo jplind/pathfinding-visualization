@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjpuak8wo13fy"]
+
+[ext_resource type="Script" path="res://Tile.gd" id="1"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+
+[node name="Tile" type="Area2D" groups=["tiles"]]
+script = ExtResource("1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("1")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+mouse_filter = 2
