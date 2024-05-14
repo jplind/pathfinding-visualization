@@ -1,4 +1,25 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://duasr3gme4csi"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://duasr3gme4csi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ssxh"]
+bg_color = Color(0.29219, 0.29219, 0.29219, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6a062"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_prcfs"]
+bg_color = Color(0.617455, 0.617455, 0.617455, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blj5w"]
 content_margin_left = 20.0
@@ -6,9 +27,15 @@ content_margin_top = 2.0
 content_margin_right = 20.0
 content_margin_bottom = 2.0
 bg_color = Color(0.203922, 0.203922, 0.203922, 1)
+expand_margin_left = 2.0
 expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
 [resource]
+Button/font_sizes/font_size = 20
+Button/styles/hover = SubResource("StyleBoxFlat_0ssxh")
+Button/styles/normal = SubResource("StyleBoxFlat_6a062")
+Button/styles/pressed = SubResource("StyleBoxFlat_prcfs")
+Label/font_sizes/font_size = 20
 Label/styles/normal = SubResource("StyleBoxFlat_blj5w")

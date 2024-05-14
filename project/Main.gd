@@ -1,8 +1,8 @@
 extends Node2D
 
-var grid_size = Vector2i(25, 25)
+var grid_size = Vector2i(35, 25)
 var tile_size = Vector2(20, 20)
-var offset = Vector2(1, 1)
+var offset = Vector2(50, 50)
 var directions = [Vector2i(1, 0), Vector2i(0, 1), Vector2i(-1, 0), Vector2i(0, -1)]
 var grid
 var tile_scene = preload("res://Tile.tscn")
@@ -15,6 +15,14 @@ var end = null
 var state = states.FREE
 
 var cost_so_far = {}
+
+@onready var breadth_area = %BreadthArea
+@onready var breadth_path = %BreadthPath
+@onready var greedy_area = %GreedyArea
+@onready var greedy_path = %GreedyPath
+@onready var a_star_area = %AStarArea
+@onready var a_star_path = %AStarPath
+@onready var result_labels = [breadth_area, breadth_path, greedy_area, greedy_path, a_star_area, a_star_path]
 
 func _ready():
 	grid = make_grid()
@@ -43,7 +51,7 @@ func make_grid():
 		for y in grid_size.y:
 			var tile =  tile_scene.instantiate()
 			arr[x].append(tile)
-			tile.position = (tile_size + offset) * Vector2(x, y) + tile_size * 0.5
+			tile.position = (tile_size) * Vector2(x, y) + tile_size * 0.5 + offset
 			add_child(tile)
 			tile.pos = Vector2i(x, y)
 			tile.connect("input_event", Callable(self, "tile_clicked").bind(tile))
@@ -62,6 +70,8 @@ func reset_grid():
 	state = states.FREE
 	start = null
 	end = null
+	for label in result_labels:
+		label.text = str(0)
 
 func tile_clicked(_viewport, event, _shape_idx, tile):
 	if not state == states.FREE:
@@ -164,7 +174,8 @@ func breadth_first_search():
 			await tile.tween.finished
 	state = states.FINISHED
 	end_search()
-	print("Area: " + str(came_from.size()) + " tiles, Path: " + str(path.size()) + " tiles")
+	breadth_area.text = str(came_from.size())
+	breadth_path.text = str(path.size())
 
 func greedy_search():
 	state = states.RUNNING
@@ -196,7 +207,8 @@ func greedy_search():
 			await tile.tween.finished
 	state = states.FINISHED
 	end_search()
-	print("Area: " + str(came_from.size()) + " tiles, Path: " + str(path.size()) + " tiles")
+	greedy_area.text = str(came_from.size())
+	greedy_path.text = str(path.size())
 
 func a_star_search():
 	state = states.RUNNING
@@ -231,4 +243,5 @@ func a_star_search():
 	state = states.FINISHED
 	end_search()
 	cost_so_far.clear()
-	print("Area: " + str(came_from.size()) + " tiles, Path: " + str(path.size()) + " tiles")
+	a_star_area.text = str(came_from.size())
+	a_star_path.text = str(path.size())
